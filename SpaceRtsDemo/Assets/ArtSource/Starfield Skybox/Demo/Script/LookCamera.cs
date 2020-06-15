@@ -28,10 +28,23 @@ public class LookCamera : MonoBehaviour
             transform.localEulerAngles = new Vector3(-rotY, rotX, 0.0f);
         }
 		
-		if (Input.GetKey(KeyCode.U))
+		if (Input.GetKey(KeyCode.Space))
 		{
-			gameObject.transform.localPosition = new Vector3(0.0f, 3500.0f, 0.0f);
+			gameObject.transform.localPosition = new Vector3(0.0f, 800.0f, -400f);
 		}
+        if (Input.GetMouseButton(0))
+        {
+            float x = Input.GetAxis("Mouse X") * mouseSensitivityX;
+            float z = Input.GetAxis("Mouse Y") * mouseSensitivityY;
+            transform.Translate(x, 0, z);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            var camera = gameObject.GetComponent<Camera>();
+            camera.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * 10;
+        }
 
-	}
+
+
+    }
 }

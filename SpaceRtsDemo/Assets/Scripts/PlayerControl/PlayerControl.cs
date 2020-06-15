@@ -81,11 +81,15 @@ public class PlayerControl : MonoBehaviour
         {
             //点击选择船
             ShipEntity ship = GameObject.Find(clickInfo.hitinfo.transform.name).GetComponent<ShipEntity>();
+            if(ship.Player == false)
+            {
+                return;
+            }
             //如果这条船已经被选中了，那就取消选中，否则就添加选中
             if (ControlShips.Contains(ship))
             {
-                ControlShips.Remove(ship);
                 ship.ChooseControl(false);
+                ControlShips.Remove(ship);
             }
             else
             {
@@ -94,9 +98,9 @@ public class PlayerControl : MonoBehaviour
                 {
                     ship.ChooseControl(false);
                 }
+                ship.ChooseControl(true);
                 ControlShips.Clear();
                 ControlShips.AddLast(ship);
-                ship.ChooseControl(true);
             }
         }
         if(clickInfo.clickType == ClickType.right)
